@@ -9,8 +9,10 @@ import java.util.Set;
 public class Sel1 {
     public static void main(String[] args) throws InterruptedException {
         Sel1 s = new Sel1();
+        //launching browser
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
+        //maximising browser
         driver.manage().window().maximize();
         driver.get("https://www.cleartrip.com/");
         Thread.sleep(2000);
@@ -41,9 +43,9 @@ public class Sel1 {
         driver.findElement(By.xpath("//span[@class=\"fw-600 fs-3\"]")).click();
         Thread.sleep(2000);
 
+        //switching to new window
         String parentWindowHande=driver.getWindowHandle();
         System.out.println("parent Window Handle"+parentWindowHande);
-
         Set<String> windowHandle= driver.getWindowHandles();
         System.out.println("window Handle"+windowHandle);
         for(String h :windowHandle){
@@ -55,22 +57,16 @@ public class Sel1 {
                 System.out.println("switched to new window"+h);
             }
         }
+
+        //validating header in new window
         driver.findElement(By.xpath("//h2[@class=\"fs-7 px-4 c-neutral-900 fw-600\"]")).isDisplayed();
         boolean a =driver.findElement(By.xpath("//h2[@class=\"fs-7 px-4 c-neutral-900 fw-600\"]")).isDisplayed();
         if(a== true) {
             System.out.println("is displayed");
         }
-            else{
-                System.out.println("not displsyed");
-            }
-
-
-    }
-
-    public String getCurrentDate() {
-        LocalDate currentdate = LocalDate.now();
-        String date = currentdate.toString();
-        return date.substring(9);
+        else{
+            System.out.println("not displsyed");
+        }
     }
 
     public String getCurrentDatePlus1() {
